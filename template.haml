@@ -7,36 +7,37 @@
         font-family: helvetica
         margin: 0px auto
         width: 700px
-      p
-        line-height: 24px
-      pre
-        background-color: #edf7ed
-        padding: 14px
-        overflow-x: auto
-      p > code
-        background-color: #edf7ed
-        padding: 4px 8px
-      article h1
-        text-align: right
-      a
-        color: #0a720a
-        text-decoration: none
-      a:hover
-        text-decoration: underline
-      header
-        border-bottom: 5px solid #0a720a
-        margin: 40px 0px
         p
-          float: right
-        h1
-          font-size: 36px
-          margin-bottom: 10px
-      footer
-        border-top: 5px solid #0a720a
-        margin: 40px 0px
-        p
-          text-align: center
-
+          line-height: 24px
+        a
+          color: #0a720a
+          text-decoration: none
+        a:hover
+          text-decoration: underline
+        header
+          border-bottom: 5px solid #0a720a
+          margin: 40px 0px
+          p
+            float: right
+          h1
+            font-size: 36px
+            margin-bottom: 10px
+        section
+          article
+            h1
+              text-align: right
+            pre
+              background-color: #edf7ed
+              padding: 14px
+              overflow-x: auto
+            p > code
+              background-color: #edf7ed
+              padding: 4px 8px
+        footer
+          border-top: 5px solid #0a720a
+          margin: 40px 0px
+          p
+            text-align: center
   %body
     %header
       %p #{entry_count} entries and counting
