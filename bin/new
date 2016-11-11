@@ -1,6 +1,13 @@
 #! /usr/bin/ruby
 
 require 'fileutils'
-filename = Time.now.strftime("entries/%Y-%m-%d-%H:%M:%S.md").downcase
-FileUtils.touch filename
-puts filename
+
+now = Time.now
+folder = now.strftime("entries/%Y/%m/%d/").downcase
+filename = now.strftime("%H:%M:%S.md").downcase
+path = folder + filename
+
+FileUtils.mkdir_p folder
+FileUtils.touch path
+
+puts path
