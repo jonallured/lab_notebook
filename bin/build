@@ -9,7 +9,8 @@ template = File.read('template.haml')
 haml_engine = Haml::Engine.new(template, { ugly: true })
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
 
-output = haml_engine.render(Object.new, { entry_count: entries.count, build_time: Time.now }) do
+build_time = Time.now.strftime("%m/%d/%Y %I:%M:%S %p")
+output = haml_engine.render(Object.new, { entry_count: entries.count, build_time: build_time }) do
   entries.map do |entry|
     content = File.read entry
     entry_html = markdown.render(content)
