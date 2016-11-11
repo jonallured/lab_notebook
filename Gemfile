@@ -3,3 +3,5 @@ ruby '2.3.1'
 #ruby-gemset=lab_notes
 
 gem 'redcarpet'
+gem 'haml'
+gem 'sass'
