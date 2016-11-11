@@ -6,8 +6,8 @@ require 'redcarpet'
 entries = Dir['entries/**/*.md']
 
 template = File.read('template.haml')
-haml_engine = Haml::Engine.new(template)
-markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+haml_engine = Haml::Engine.new(template, { ugly: true })
+markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
 
 output = haml_engine.render do
   entries.map do |entry|
