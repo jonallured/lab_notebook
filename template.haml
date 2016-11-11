@@ -3,20 +3,37 @@
   %head
     :sass
       body
+        color: #333
         font-family: helvetica
         margin: 0px auto
         width: 700px
       p
         line-height: 24px
       pre
-        background-color: #deebef
+        background-color: #edf7ed
         padding: 14px
         overflow-x: auto
       p > code
-        background-color: #deebef
+        background-color: #edf7ed
         padding: 4px 8px
+      article h1
+        text-align: right
+      a
+        color: #0a720a
+        text-decoration: none
+      a:hover
+        text-decoration: underline
+      header
+        border-bottom: 5px solid #0a720a
+        margin: 40px 0px
+        p
+          float: right
+        h1
+          font-size: 36px
+          margin-bottom: 10px
   %body
     %header
+      %p #{entry_count} entries and counting
       %h1 Lab Notebook
     %section= yield
     %footer
