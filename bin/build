@@ -1,0 +1,22 @@
+#! /usr/bin/env ruby
+
+require 'haml'
+require 'redcarpet'
+
+entries = Dir['entries/**/*.md']
+
+template = File.read('template.haml')
+haml_engine = Haml::Engine.new(template)
+markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+
+output = haml_engine.render do
+  entries.map do |entry|
+    content = File.read entry
+    entry_html = markdown.render(content)
+    "<article><h1>#{entry}</h1>#{entry_html}</article>"
+  end.join
+end
+
+File.open('output.html', 'w') do |file|
+  file.puts output
+end
