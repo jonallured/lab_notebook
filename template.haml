@@ -31,9 +31,16 @@
         h1
           font-size: 36px
           margin-bottom: 10px
+      footer
+        border-top: 5px solid #0a720a
+        margin: 40px 0px
+        p
+          text-align: center
+
   %body
     %header
       %p #{entry_count} entries and counting
       %h1 Lab Notebook
     %section= yield
     %footer
+      %p built at #{build_time}
