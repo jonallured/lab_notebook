@@ -10,4 +10,4 @@ path = folder + filename
 FileUtils.mkdir_p folder
 FileUtils.touch path
 
-puts path
+puts [Dir.pwd, path].join('/')
