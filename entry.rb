@@ -27,7 +27,7 @@ class Entry
   end
 
   def has_frontmatter?
-    raw_content.match /^---$/
+    split_content.count > 1
   end
 
   def raw_content
@@ -35,7 +35,7 @@ class Entry
   end
 
   def body
-    raw_content.split(/^---$/).last
+    split_content.last
   end
 
   def tag_list
@@ -52,6 +52,10 @@ class Entry
   end
 
   def frontmatter
-    raw_content.split(/^---$/).first
+    split_content.first
+  end
+
+  def split_content
+    raw_content.split /^---$/
   end
 end
