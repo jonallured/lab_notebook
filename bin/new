@@ -5,7 +5,7 @@ require 'fileutils'
 notes_home = ENV.fetch 'LAB_NOTES_HOME', '~/lab_notes'
 
 now = Time.now
-folder = now.strftime("#{notes_home}/entries/%Y/%m/%d/").downcase
+folder = now.strftime("#{notes_home}/entries/%Y/%m/%d/")
 filename = now.strftime("%H:%M:%S.md").downcase
 path = folder + filename
 
