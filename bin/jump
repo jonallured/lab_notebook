@@ -4,12 +4,18 @@ notes_home = ENV.fetch 'LAB_NOTES_HOME', '~/lab_notes'
 
 filenames = Dir["#{notes_home}/entries/**/*.md"]
 
-position = ARGV.first
+position, current_entry = ARGV.first, ARGV.last
 
 if position == 'first'
   puts filenames.first
 elsif position == 'last'
   puts filenames.last
+elsif position == 'next'
+  index = filenames.index current_entry
+  puts filenames[index + 1]
+elsif position == 'prev'
+  index = filenames.index current_entry
+  puts filenames[index - 1]
 else
   exit 1
 end
