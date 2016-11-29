@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+
+notes_home = ENV.fetch 'LAB_NOTES_HOME', '~/lab_notes'
+
+filenames = Dir["#{notes_home}/entries/**/*.md"]
+
+position = ARGV.first
+
+if position == 'first'
+  puts filenames.first
+elsif position == 'last'
+  puts filenames.last
+else
+  exit 1
+end
