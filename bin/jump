@@ -4,6 +4,8 @@ notes_home = ENV.fetch 'LAB_NOTES_HOME', '~/lab_notes'
 
 filenames = Dir["#{notes_home}/entries/**/*.md"]
 
+exit 1 unless ARGV.count > 0
+
 position, current_entry = ARGV.first, ARGV.last
 
 if position == 'first'
