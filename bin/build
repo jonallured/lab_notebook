@@ -34,7 +34,7 @@ for year_folder in Dir['entries/*']
   end
 
   for week, filenames in entries_by_week
-    locals = { entry_count: entry_count, build_time: build_time }
+    locals = { entry_count: entry_count, build_time: build_time, week_number: week }
     output = haml_engine.render(Object.new, locals) do
       filenames.map { |filename| Entry.new(filename, markdown).to_html }.join
     end
