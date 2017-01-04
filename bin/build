@@ -33,8 +33,12 @@ for year_folder in Dir['entries/*']
   end
 
   for week, filenames in entries_by_week
-    next_week = week + 1
-    prev_week = week - 1
+    next_week_number = week + 1
+    prev_week_number = week - 1
+
+    next_week = Dir.exists?("#{weeks_folder}/#{next_week_number}") ? next_week_number : nil
+    prev_week = Dir.exists?("#{weeks_folder}/#{prev_week_number}") ? prev_week_number : nil
+
     locals = {
         entry_count: entry_count,
         build_time: build_time,
