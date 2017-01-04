@@ -28,6 +28,8 @@ for year_folder in Dir['entries/*']
   for day_folder in Dir["#{year_folder}/*/*"]
     date = Date.strptime(day_folder, "entries/%Y/%m/%d")
     week = date.cweek
+    week_folder = "#{weeks_folder}/#{week}"
+    FileUtils.mkdir_p week_folder
     entries_by_week[week] = entries_by_week[week] + Dir["#{day_folder}/*.md"]
   end
 
@@ -37,8 +39,6 @@ for year_folder in Dir['entries/*']
     end
 
     week_folder = "#{weeks_folder}/#{week}"
-    FileUtils.mkdir_p week_folder
-
     File.open("#{week_folder}/index.html", 'w') do |file|
       file.puts output
     end
