@@ -45,6 +45,9 @@
               font-size: 14px
               margin-left: 0px
               padding-left: 10px
+          nav
+            font-size: 18px
+            text-align: center
         footer
           border-top: 5px solid #0a720a
           margin: 40px 0px
@@ -54,6 +57,15 @@
     %header
       %p #{entry_count} entries and counting
       %h1 Lab Notebook
-    %section= yield
+    %section
+      = yield
+      %nav
+        %p
+          - if prev_week
+            %a{href: "../#{prev_week}/index.html"} prev
+            - if next_week
+              \~
+          - if next_week
+            %a{href: "../#{next_week}/index.html"} next
     %footer
       %p built at #{build_time}

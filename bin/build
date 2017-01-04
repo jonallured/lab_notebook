@@ -15,7 +15,6 @@ haml_engine = Haml::Engine.new(template, { ugly: true })
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
 
 entry_count = Dir['entries/**/*.md'].count
-
 build_time = Time.now.strftime("%m/%d/%Y %I:%M:%S %p")
 
 for year_folder in Dir['entries/*']
@@ -34,7 +33,16 @@ for year_folder in Dir['entries/*']
   end
 
   for week, filenames in entries_by_week
-    locals = { entry_count: entry_count, build_time: build_time, week_number: week }
+    next_week = week + 1
+    prev_week = week - 1
+    locals = {
+        entry_count: entry_count,
+        build_time: build_time,
+        week_number: week,
+        next_week: next_week,
+        prev_week: prev_week
+    }
+
     output = haml_engine.render(Object.new, locals) do
       filenames.map { |filename| Entry.new(filename, markdown).to_html }.join
     end
