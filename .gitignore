@@ -1,4 +1,4 @@
 .sass-cache/
+build/
 entries/*
 !entries/.keep
-output.html
