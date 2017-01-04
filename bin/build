@@ -1,21 +1,46 @@
 #! /usr/bin/env ruby
 
+require 'fileutils'
+require 'date'
 require 'haml'
 require 'redcarpet'
 
 require './entry'
 
-filenames = Dir['entries/**/*.md']
+FileUtils.rm_rf 'build'
+FileUtils.mkdir_p 'build'
 
 template = File.read('template.haml')
 haml_engine = Haml::Engine.new(template, { ugly: true })
 markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, fenced_code_blocks: true)
 
-build_time = Time.now.strftime("%m/%d/%Y %I:%M:%S %p")
-output = haml_engine.render(Object.new, { entry_count: filenames.count, build_time: build_time }) do
-  filenames.map { |filename| Entry.new(filename, markdown).to_html }.join
-end
+entry_count = Dir['entries/**/*.md'].count
 
-File.open('output.html', 'w') do |file|
-  file.puts output
+build_time = Time.now.strftime("%m/%d/%Y %I:%M:%S %p")
+
+for year_folder in Dir['entries/*']
+  year = year_folder.split('/').last
+  weeks_folder = "build/#{year}/weeks"
+  FileUtils.mkdir_p weeks_folder
+
+  entries_by_week = Hash.new(Array.new)
+
+  for day_folder in Dir["#{year_folder}/*/*"]
+    date = Date.strptime(day_folder, "entries/%Y/%m/%d")
+    week = date.cweek
+    entries_by_week[week] = entries_by_week[week] + Dir["#{day_folder}/*.md"]
+  end
+
+  for week, filenames in entries_by_week
+    output = haml_engine.render(Object.new, { entry_count: entry_count, build_time: build_time }) do
+      filenames.map { |filename| Entry.new(filename, markdown).to_html }.join
+    end
+
+    week_folder = "#{weeks_folder}/#{week}"
+    FileUtils.mkdir_p week_folder
+
+    File.open("#{week_folder}/index.html", 'w') do |file|
+      file.puts output
+    end
+  end
 end
