@@ -3,6 +3,7 @@ ruby '2.3.1'
 #ruby-gemset=lab_notes
 
 gem 'haml'
+gem 'rack'
 gem 'redcarpet'
 gem 'rspec'
 gem 'sass'
