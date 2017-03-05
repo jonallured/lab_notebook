@@ -45,15 +45,13 @@ end
 
 FileUtils.rm_rf 'tmp'
 
+resolver = Resolver.new mapping
 
-# mapping = nil # lol, idk
-# resolver = Resolver.new mapping
+paths = [
+  '/Users/jon/code/lab_notes/entries_test',
+  '/Users/jon/Dropbox/entries_test'
+]
 
-# paths = [
-#   '/Users/jon/code/lab_notes/entries_test',
-#   '/Users/jon/Dropbox/entries_test'
-# ]
-
-# listener = Listen.to(*paths, &resolver.method(:resolve))
-# listener.start # not blocking
-# sleep
+listener = Listen.to(*paths, &resolver.method(:resolve))
+listener.start # not blocking
+sleep

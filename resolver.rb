@@ -1,10 +1,6 @@
-# mapping:
-# {
-#   'entries/2017/01/01/08:00:00.md' => '9j3q0j0q34oiqjfu8934fjo.json'
-# }
 class Resolver
   def initialize(mapping)
-
+    @mapping = mapping
   end
 
   def resolve(modifications, additions, removals)
@@ -14,13 +10,16 @@ class Resolver
         puts 'dropbox modification'
         puts "  #{modified}"
       else
-        # use mapping to remove from Dropbox
-        old_hash = @mapping[modified]
-        File.delete old_hash
-        # use bin/encrypt to save to Dropbox
-        new_hash = ``
         puts 'local modification'
         puts "  #{modified}"
+
+
+
+        old_hash = @mapping[modified]
+        File.delete old_hash
+        tmp_path = `bin/encrypt #{modified}`.chomp
+        dropbox_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test', File.basename(tmp_path)
+        FileUtils.cp tmp_path, dropbox_path
       end
     end
 
