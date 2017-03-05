@@ -2,10 +2,8 @@
 
 require './entry_decrypter'
 
-# ultimately what i'd want here would be to iterate all private keys
-private_key = File.read 'private.key'
-rsa_key = OpenSSL::PKey::RSA.new private_key
-rsa_keys = [rsa_key]
+key_paths = Dir['private_keys/*.key']
+rsa_keys = key_paths.map { |path| OpenSSL::PKey::RSA.new(File.read(path)) }
 
 filename = ARGV.first
 encryption_json = File.read filename
