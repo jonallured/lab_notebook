@@ -14,7 +14,7 @@ unencrypted_details = {
 }
 
 # ultimately what i'd want here is picking this machine's private key
-private_key = File.read 'private.key'
+private_key = File.read 'private_keys/mine.link'
 rsa_key = OpenSSL::PKey::RSA.new private_key
 
 encrypter = EntryEncrypter.new unencrypted_details, rsa_key

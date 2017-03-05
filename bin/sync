@@ -29,7 +29,7 @@ valid_hashes = mapping.values
 dropbox_entries_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test'
 hashes = Dir["#{dropbox_entries_path}/*.json"]
 missing_hashes = hashes - valid_hashes
-private_key = File.read 'private.key'
+private_key = File.read 'private_keys/mine.link'
 rsa_key = OpenSSL::PKey::RSA.new private_key
 for hash in missing_hashes
   omg = File.read hash
