@@ -1,0 +1,27 @@
+#! /usr/bin/env ruby
+
+require 'fileutils'
+require 'openssl'
+
+FileUtils.mkdir_p 'private_keys'
+
+hostname = `hostname`.chomp.split('.local').first
+private_keys_path = File.join Dir.pwd, 'private_keys'
+private_key_path = File.join private_keys_path, "#{hostname}.key"
+mine_path = File.join private_keys_path, 'mine.link'
+
+if File.exists? private_key_path
+  puts "skipping private key generation - `private_keys/#{hostname}.key` already exists"
+else
+  File.open(private_key_path, 'w') { |f| f.puts OpenSSL::PKey::RSA.new(2048) }
+end
+
+if File.exists? mine_path
+  puts "skipping symlink generation - `private_keys/mine.link` already exists"
+else
+  FileUtils.ln_s private_key_path, mine_path
+end
+
+puts 'private key generated and symlinked!'
+puts 'grab other keys like this:'
+puts '  $ scp hostname:~/lab_notes/private_keys/hostname.key private_keys/'

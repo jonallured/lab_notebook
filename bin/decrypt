@@ -1,0 +1,17 @@
+#! /usr/bin/env ruby
+
+require './entry_decrypter'
+
+# ultimately what i'd want here would be to iterate all private keys
+private_key = File.read 'private.key'
+rsa_key = OpenSSL::PKey::RSA.new private_key
+rsa_keys = [rsa_key]
+
+filename = ARGV.first
+encryption_json = File.read filename
+encryption_details = JSON.parse encryption_json
+
+decrypter = EntryDecrypter.new encryption_details, rsa_keys
+decrypter.decrypt
+puts decrypter.filename
+puts decrypter.text

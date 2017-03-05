@@ -1,0 +1,59 @@
+#! /usr/bin/env ruby
+
+require 'listen'
+require 'fileutils'
+require 'openssl'
+require 'json'
+
+require './resolver'
+
+paths = Dir['entries_test/**/*.md'].map { |path| File.join Dir.pwd, path }
+mapping = Hash.new
+
+for path in paths
+  tmp_path = `bin/encrypt #{path}`.chomp
+  dropbox_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test', File.basename(tmp_path)
+  if File.exists? dropbox_path
+    print ?.
+  else
+    FileUtils.cp tmp_path, dropbox_path
+    print ?!
+  end
+  mapping[path] = dropbox_path
+end
+
+puts "\ndone encrypting"
+
+valid_hashes = mapping.values
+
+dropbox_entries_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test'
+hashes = Dir["#{dropbox_entries_path}/*.json"]
+missing_hashes = hashes - valid_hashes
+private_key = File.read 'private.key'
+rsa_key = OpenSSL::PKey::RSA.new private_key
+for hash in missing_hashes
+  omg = File.read hash
+  lol = JSON.parse omg
+
+  if rsa_key.public_key.to_s == lol['public_key']
+    File.delete hash
+  else
+    # decrypt and save locally
+    # update mapping
+  end
+end
+
+FileUtils.rm_rf 'tmp'
+
+
+# mapping = nil # lol, idk
+# resolver = Resolver.new mapping
+
+# paths = [
+#   '/Users/jon/code/lab_notes/entries_test',
+#   '/Users/jon/Dropbox/entries_test'
+# ]
+
+# listener = Listen.to(*paths, &resolver.method(:resolve))
+# listener.start # not blocking
+# sleep
