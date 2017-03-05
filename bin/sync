@@ -38,8 +38,8 @@ for hash in missing_hashes
   if rsa_key.public_key.to_s == lol['public_key']
     File.delete hash
   else
-    # decrypt and save locally
-    # update mapping
+    new = `bin/decrypt #{hash}`
+    mapping[new] = hash
   end
 end
 
