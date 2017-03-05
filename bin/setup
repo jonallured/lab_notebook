@@ -24,4 +24,4 @@ end
 
 puts 'private key generated and symlinked!'
 puts 'grab other keys like this:'
-puts '  $ scp hostname:~/lab_notes/private_keys/hostname.key private_keys/'
+puts '  $ scp hostname:~/code/lab_notes/private_keys/hostname.key private_keys/'
