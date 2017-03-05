@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+require 'fileutils'
 require './entry_decrypter'
 
 key_paths = Dir['private_keys/*.key']
@@ -11,5 +12,8 @@ encryption_details = JSON.parse encryption_json
 
 decrypter = EntryDecrypter.new encryption_details, rsa_keys
 decrypter.decrypt
+
+FileUtils.mkdir_p(File.dirname(decrypter.filename))
+File.open(decrypter.filename, 'w') { |f| f.puts decrypter.text }
+
 puts decrypter.filename
-puts decrypter.text
