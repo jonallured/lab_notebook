@@ -53,7 +53,8 @@ class EntryEncrypter
   end
 
   def encrypt_text
-    json = cipher.encrypt(unencrypted_text)
+    input_text = unencrypted_text.empty? ? ' ' : unencrypted_text
+    json = cipher.encrypt(input_text)
     text_details = JSON.parse json
     @details[:text] = {
       ct: text_details['ct'],
