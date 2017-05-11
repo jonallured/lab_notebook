@@ -7,45 +7,38 @@ require 'json'
 
 require './resolver'
 
-paths = Dir['entries_test/**/*.md'].map { |path| File.join Dir.pwd, path }
+dropbox_folder = File.join Dir.home, 'Dropbox/lab_notes/entries_test'
+local_folder = File.join Dir.pwd, 'entries_test'
+
+local_entry_paths = Dir["#{local_folder}/**/*.md"]
+dropbox_entry_paths = Dir["#{dropbox_folder}/*.json"]
+
 mapping = Hash.new
 
-for path in paths
-  tmp_path = `bin/encrypt #{path}`.chomp
-  dropbox_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test', File.basename(tmp_path)
+for dropbox_entry_path in dropbox_entry_paths
+  print ?.
+  local_path = `bin/decrypt #{dropbox_entry_path}`.chomp
+  mapping[local_path] = dropbox_entry_path
+end
+
+puts "\ndone decrypting"
+puts mapping
+
+for local_entry_path in local_entry_paths
+  tmp_path = `bin/encrypt #{local_entry_path}`.chomp
+  dropbox_path = File.join dropbox_folder, File.basename(tmp_path)
+
   if File.exists? dropbox_path
     print ?.
   else
-    # i think this is my current bug - this line executing at this point in the
-    # process creates duplicates
     FileUtils.cp tmp_path, dropbox_path
     print ?!
   end
-  mapping[path] = dropbox_path
+  mapping[local_entry_path] = dropbox_path
 end
 
 puts "\ndone encrypting"
-
-valid_hashes = mapping.values
-
-dropbox_entries_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test'
-hashes = Dir["#{dropbox_entries_path}/*.json"]
-missing_hashes = hashes - valid_hashes
-private_key = File.read 'private_keys/mine.link'
-rsa_key = OpenSSL::PKey::RSA.new private_key
-for hash in missing_hashes
-  omg = File.read hash
-  lol = JSON.parse omg
-
-  if rsa_key.public_key.to_s == lol['public_key']
-    File.delete hash
-  else
-    new = `bin/decrypt #{hash}`
-    mapping[new] = hash
-  end
-end
-
-FileUtils.rm_rf 'tmp'
+puts mapping
 
 resolver = Resolver.new mapping
 
