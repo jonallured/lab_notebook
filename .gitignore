@@ -3,3 +3,5 @@ build/
 entries/*
 !entries/.keep
 private_keys/
+tmp/
+entries_test/

@@ -16,6 +16,8 @@ for path in paths
   if File.exists? dropbox_path
     print ?.
   else
+    # i think this is my current bug - this line executing at this point in the
+    # process creates duplicates
     FileUtils.cp tmp_path, dropbox_path
     print ?!
   end
@@ -49,7 +51,7 @@ resolver = Resolver.new mapping
 
 paths = [
   '/Users/jon/code/lab_notes/entries_test',
-  '/Users/jon/Dropbox/entries_test'
+  '/Users/jon/Dropbox/lab_notes/entries_test'
 ]
 
 listener = Listen.to(*paths, &resolver.method(:resolve))
