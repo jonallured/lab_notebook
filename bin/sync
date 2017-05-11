@@ -1,52 +1,17 @@
 #! /usr/bin/env ruby
 
 require 'listen'
-require 'fileutils'
-require 'openssl'
-require 'json'
-
 require './resolver'
 
-dropbox_folder = File.join Dir.home, 'Dropbox/lab_notes/entries_test'
-local_folder = File.join Dir.pwd, 'entries_test'
-
-local_entry_paths = Dir["#{local_folder}/**/*.md"]
-dropbox_entry_paths = Dir["#{dropbox_folder}/*.json"]
-
-mapping = Hash.new
-
-for dropbox_entry_path in dropbox_entry_paths
-  print ?.
-  local_path = `bin/decrypt #{dropbox_entry_path}`.chomp
-  mapping[local_path] = dropbox_entry_path
-end
-
-puts "\ndone decrypting"
-puts mapping
-
-for local_entry_path in local_entry_paths
-  tmp_path = `bin/encrypt #{local_entry_path}`.chomp
-  dropbox_path = File.join dropbox_folder, File.basename(tmp_path)
-
-  if File.exists? dropbox_path
-    print ?.
-  else
-    FileUtils.cp tmp_path, dropbox_path
-    print ?!
-  end
-  mapping[local_entry_path] = dropbox_path
-end
-
-puts "\ndone encrypting"
-puts mapping
-
-resolver = Resolver.new mapping
-
-paths = [
-  '/Users/jon/code/lab_notes/entries_test',
-  '/Users/jon/Dropbox/lab_notes/entries_test'
+entry_folders = [
+  File.join(Dir.home, 'Dropbox/lab_notes/entries_test'),
+  File.join(Dir.pwd, 'entries_test')
 ]
 
-listener = Listen.to(*paths, &resolver.method(:resolve))
+resolver = Resolver.new entry_folders
+resolver.startup
+
+listener = Listen.to(*entry_folders, &resolver.method(:resolve))
 listener.start # not blocking
+
 sleep

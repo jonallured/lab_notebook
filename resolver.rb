@@ -1,6 +1,39 @@
+require 'fileutils'
+
 class Resolver
-  def initialize(mapping)
-    @mapping = mapping
+  attr_reader :dropbox_folder, :local_folder
+
+  def initialize(entry_folders)
+    @dropbox_folder, @local_folder = entry_folders
+    @mapping = Hash.new
+  end
+
+  def startup
+    local_entry_paths = Dir["#{local_folder}/**/*.md"]
+    dropbox_entry_paths = Dir["#{dropbox_folder}/*.json"]
+
+    for dropbox_entry_path in dropbox_entry_paths
+      print ?.
+      local_path = `bin/decrypt #{dropbox_entry_path}`.chomp
+      @mapping[local_path] = dropbox_entry_path
+    end
+
+    puts "\ndone decrypting"
+
+    for local_entry_path in local_entry_paths
+      tmp_path = `bin/encrypt #{local_entry_path}`.chomp
+      dropbox_path = File.join dropbox_folder, File.basename(tmp_path)
+
+      if File.exists? dropbox_path
+        print ?.
+      else
+        FileUtils.cp tmp_path, dropbox_path
+        print ?!
+      end
+      @mapping[local_entry_path] = dropbox_path
+    end
+
+    puts "\ndone encrypting"
   end
 
   def resolve(modifications, additions, removals)
