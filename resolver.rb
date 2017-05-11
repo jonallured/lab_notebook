@@ -39,8 +39,7 @@ class Resolver
   def resolve(modifications, additions, removals)
     for modified in modifications
       if modified.match /Dropbox/
-        # this event does fire, but i don't understand what i should do with
-        # it, so i'm ignoring it for now
+        # i don't understand this case, so i'm just logging it
         puts 'dropbox modification'
         puts "  #{modified}"
       else
@@ -50,7 +49,7 @@ class Resolver
         stale_dropbox_path = @mapping[modified]
         File.delete stale_dropbox_path
         tmp_path = `bin/encrypt #{modified}`.chomp
-        dropbox_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test', File.basename(tmp_path)
+        dropbox_path = File.join dropbox_folder, File.basename(tmp_path)
         FileUtils.cp tmp_path, dropbox_path
         @mapping[modified] = dropbox_path
       end
@@ -68,7 +67,7 @@ class Resolver
         puts "  #{added}"
 
         tmp_path = `bin/encrypt #{added}`.chomp
-        dropbox_path = File.join Dir.home, 'Dropbox/lab_notes/entries_test', File.basename(tmp_path)
+        dropbox_path = File.join dropbox_folder, File.basename(tmp_path)
         FileUtils.cp tmp_path, dropbox_path
         @mapping[added] = dropbox_path
       end
