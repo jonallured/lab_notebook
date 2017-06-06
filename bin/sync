@@ -4,8 +4,8 @@ require 'listen'
 require './resolver'
 
 entry_folders = [
-  File.join(Dir.home, 'Dropbox/lab_notes/entries_test'),
-  File.join(Dir.pwd, 'entries_test')
+  File.join(Dir.home, 'Dropbox/lab_notes/entries'),
+  File.join(Dir.pwd, 'entries')
 ]
 
 resolver = Resolver.new entry_folders
