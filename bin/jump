@@ -2,7 +2,7 @@
 
 notes_home = ENV.fetch 'LAB_NOTES_HOME', '~/lab_notes'
 
-filenames = Dir["#{notes_home}/entries/**/*.md"]
+filenames = Dir["#{notes_home}/entries/**/*.md"].sort
 
 exit 1 unless ARGV.count > 0
 
