@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.2.5)
-    ffi (1.9.18)
+    ffi (1.15.0)
     gibberish (2.1.0)
     haml (4.0.7)
       tilt
