@@ -1,5 +1,7 @@
 Time.zone = "US/Central"
 
+set :layout, :default
+
 page "/*.xml", layout: false
 page "/*.json", layout: false
 page "/*.txt", layout: false
