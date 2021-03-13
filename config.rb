@@ -17,4 +17,6 @@ activate :blog do |blog|
 end
 
 activate :directory_indexes
+set :trailing_slash, false
+
 activate :livereload
