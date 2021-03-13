@@ -10,7 +10,7 @@
   %body
     #wrapper
       %header
-        %h1 Lab Notebook
+        %h1= link_to "Lab Notebook", "/"
       %main= yield
       %footer
         %p= current_page.source_file
