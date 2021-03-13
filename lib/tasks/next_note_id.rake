@@ -10,5 +10,6 @@ task :next_note_id do
     yaml["id"].to_i
   end
 
-  puts ids.max + 1
+  max = ids.max || 0
+  puts max + 1
 end
