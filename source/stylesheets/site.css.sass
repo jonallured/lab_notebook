@@ -1,11 +1,19 @@
+$off-white: #FFFFEB
+$off-black: #493F40
+$red: #A82835
+$light-blue: #D6E8E1
+
+$body-family: "EB Garamond"
+$title-family: "Futura"
+
 body
-  background-color: #FFFFEB
-  color: #493F40
-  font-family: "EB Garamond"
+  background-color: $off-white
+  color: $off-black
+  font-family: $body-family
 
   h1, h2, h3, h4, h5, h6
-    color: #A82835
-    font-family: "Futura"
+    color: $red
+    font-family: $title-family
     font-weight: 100
 
   #wrapper
@@ -13,7 +21,7 @@ body
     width: 600px
 
     header
-      border-bottom: 4px solid #D6E8E1
+      border-bottom: 4px solid $light-blue
       margin-top: 40px
       text-align: center
 
@@ -22,11 +30,11 @@ body
         margin: 0
 
         a
-          color: #A82835
+          color: $red
           text-decoration: none
 
     footer
-      border-top: 4px solid #D6E8E1
+      border-top: 4px solid $light-blue
 
       p
         font-size: 14px
