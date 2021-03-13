@@ -7,4 +7,9 @@
     %title= current_page.data.title || "Lab Notebook"
     = stylesheet_link_tag "site"
     = javascript_include_tag "site"
-  %body= yield
+  %body
+    #wrapper
+      %header
+        %h1 Lab Notebook
+      %main= yield
+      %footer
