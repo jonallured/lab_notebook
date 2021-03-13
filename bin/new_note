@@ -2,9 +2,15 @@
 
 set -e
 
-id=$@
-title=$(ruby -r humanize -e "puts $id.humanize.gsub(' ', '-')")
-output=$(bundle exec middleman article "$title")
+id=$(bundle exec rake next_note_id)
+id_title=$(ruby -r humanize -e "puts $id.humanize")
+
+arg_title=$@
+
+title=$([ "$arg_title" = "" ] && echo $id_title || echo $arg_title)
+clean_title=$(echo $title | titlecase)
+
+output=$(bundle exec middleman article "$clean_title")
 article_path=$(echo $output | tr -s ' ' | cut -d ' ' -f2)
 
 sed -i '' "s/ID/$id/" $article_path

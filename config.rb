@@ -13,7 +13,7 @@ activate :blog do |blog|
   blog.new_article_template = File.expand_path("article_templates/default.erb", File.dirname(__FILE__))
   blog.permalink = "{id}.html"
   blog.prefix = "notes"
-  blog.sources = "{year}/{month}/{title}.html"
+  blog.sources = "general/{year}/{month}/{title}.html"
 end
 
 activate :directory_indexes
