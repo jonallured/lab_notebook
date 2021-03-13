@@ -1,12 +1,12 @@
 Time.zone = "US/Central"
 
-activate :autoprefixer do |prefix|
-  prefix.browsers = "last 2 versions"
-end
-
 page "/*.xml", layout: false
 page "/*.json", layout: false
 page "/*.txt", layout: false
+
+activate :autoprefixer do |prefix|
+  prefix.browsers = "last 2 versions"
+end
 
 activate :blog do |blog|
   blog.default_extension = ".md"
@@ -15,3 +15,5 @@ activate :blog do |blog|
   blog.prefix = "notes"
   blog.sources = "{year}/{month}/{title}.html"
 end
+
+activate :livereload
