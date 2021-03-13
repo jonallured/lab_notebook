@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+id=$@
+title=$(ruby -r humanize -e "puts $id.humanize.gsub(' ', '-')")
+output=$(bundle exec middleman article "$title")
+article_path=$(echo $output | tr -s ' ' | cut -d ' ' -f2)
+
+sed -i '' "s/ID/$id/" $article_path
