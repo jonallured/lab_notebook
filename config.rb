@@ -16,4 +16,5 @@ activate :blog do |blog|
   blog.sources = "{year}/{month}/{title}.html"
 end
 
+activate :directory_indexes
 activate :livereload
