@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "humanize"
+gem "rake"
 gem "middleman", "~> 4.2"
 gem "middleman-blog"
 gem "middleman-autoprefixer", "~> 2.7"
