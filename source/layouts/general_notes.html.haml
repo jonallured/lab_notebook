@@ -1,0 +1,8 @@
+= wrap_layout :default do
+  %aside
+    %p
+      - if current_article.article_previous
+        = link_to "prev", current_article.article_previous.url
+      - if current_article.article_next
+        = link_to "next", current_article.article_next.url
+  = yield
