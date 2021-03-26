@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'guard'
+gem 'guard-middleman'
+gem 'guard-shell'
 gem 'humanize'
 gem 'middleman', '~> 4.2'
 gem 'middleman-autoprefixer', '~> 2.7'

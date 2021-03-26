@@ -34,3 +34,12 @@ as adding a tag for the project you're working on that triggered the note. Or
 tag notes that pertain to a service with the name of that service. Maybe tag
 things that you found while Googling as research. Also, star the ones that
 you're going to need frequently or that you refer to often.
+
+## Starting a Server
+
+Run `./bin/server` to start a Middleman Server on port 5555.
+
+## Watch for updates
+
+Run `./bin/watch_notes` and the `source/notes/` folder is watched for updates
+and then those updates are committed to the sub-repo.
