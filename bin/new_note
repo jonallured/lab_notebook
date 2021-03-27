@@ -14,3 +14,4 @@ output=$(bundle exec middleman article "$clean_title")
 article_path=$(echo $output | tr -s ' ' | cut -d ' ' -f2)
 
 sed -i '' "s/ID/$id/" $article_path
+echo $article_path
