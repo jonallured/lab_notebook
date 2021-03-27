@@ -1,0 +1,2 @@
+cd static
+rackup -p 5555
