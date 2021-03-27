@@ -43,3 +43,13 @@ Run `./bin/server` to start a Middleman Server on port 5555.
 
 Run `./bin/watch_notes` and the `source/notes/` folder is watched for updates
 and then those updates are committed to the sub-repo.
+
+## Connecting to puma-dev
+
+This is the command to run:
+
+```
+$ echo 5555 > ~/.puma-dev/lab
+```
+
+And then the notes site can be reached at https://lab.notebook.
