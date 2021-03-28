@@ -1,0 +1,6 @@
+%h2 Some Name
+
+%ul
+  - something = calculate_individual_ooos('some-name')
+  - something.each do |foo|
+    %li= link_to foo.title, foo.url
