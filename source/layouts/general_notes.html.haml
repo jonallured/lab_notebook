@@ -3,6 +3,20 @@
     %p
       - if current_article.article_previous
         = link_to "prev", current_article.article_previous.url
+      - else
+        prev
+
       - if current_article.article_next
         = link_to "next", current_article.article_next.url
+      - else
+        next
+
+
+  %h1= current_article.title
+  %p
+    #{current_article.date.strftime('%m/%d/%y')} ~ tags:
+    - if current_article.tags.size > 0
+      = tag_list(current_article.tags)
+    - else
+      none
   = yield

@@ -80,4 +80,12 @@ module CustomHelpers
     paths = Dir.glob("source/notes/one-on-ones/#{slug}/*.html.md")
     Something.compute_for(paths)
   end
+
+  def tag_list(tags)
+    links = tags.map do |tag|
+      link_to(tag, tag_path(tag))
+    end
+
+    links.join(', ')
+  end
 end

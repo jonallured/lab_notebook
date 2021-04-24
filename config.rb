@@ -22,6 +22,7 @@ activate :blog do |blog|
   blog.permalink = '{id}.html'
   blog.prefix = 'notes'
   blog.sources = 'general/{year}/{month}/{title}.html'
+  blog.tag_template = 'tag.html'
 end
 
 activate :directory_indexes
