@@ -6,7 +6,7 @@ task :next_note_id do
 
   ids = note_paths.map do |path|
     data = File.read(path)
-    yaml = YAML.safe_load(data, [Time])
+    yaml = YAML.safe_load(data, permitted_classes: [Time])
     yaml["id"].to_i
   end
 
