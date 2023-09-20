@@ -44,11 +44,15 @@ Run `./bin/server` to start a Middleman Server on port 5555.
 Run `./bin/watch_notes` and the `source/notes/` folder is watched for updates
 and then those updates are committed to the sub-repo.
 
-## Connecting to puma-dev
+## Proxy through puma-dev
 
-This is the command to run:
+Once a server is started then the notebook can be reached on
+http://localhost:5555 but we can also proxy through
+[puma-dev](https://github.com/puma/puma-dev) and then run this:
 
 ```
+$ puma-dev -install -d notebook
+# https://github.com/puma/puma-dev#proxy-support
 $ echo 5555 > ~/.puma-dev/lab
 ```
 
