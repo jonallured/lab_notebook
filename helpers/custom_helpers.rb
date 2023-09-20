@@ -86,6 +86,6 @@ module CustomHelpers
       link_to(tag, tag_path(tag))
     end
 
-    links.join(", ")
+    links.join(", ").html_safe
   end
 end
