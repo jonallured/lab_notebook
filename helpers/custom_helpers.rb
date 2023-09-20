@@ -1,25 +1,3 @@
-class Sprint
-  def self.compute_for(paths)
-    paths.map { |path| new(path) }.sort.reverse
-  end
-
-  def initialize(path)
-    @path = path
-  end
-
-  def title
-    @path.split("/").last
-  end
-
-  def url
-    "/notes/sprints/#{title}"
-  end
-
-  def <=>(other)
-    title <=> other.title
-  end
-end
-
 class Oneonone
   def self.compute_for(paths)
     paths.map { |path| new(path) }.sort
@@ -66,11 +44,6 @@ class Something
 end
 
 module CustomHelpers
-  def calculate_sprints
-    sprint_paths = Dir.glob("source/notes/sprints/20*")
-    Sprint.compute_for(sprint_paths)
-  end
-
   def calculate_one_on_ones
     paths = Dir.glob("source/notes/one-on-ones/*-*")
     Oneonone.compute_for(paths)
