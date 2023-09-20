@@ -1,16 +1,16 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'guard'
-gem 'guard-middleman'
-gem 'guard-shell'
-gem 'humanize'
-gem 'middleman'
-gem 'middleman-autoprefixer'
-gem 'middleman-blog'
-gem 'middleman-livereload'
-gem 'middleman-syntax'
-gem 'rake'
-gem 'redcarpet'
-gem 'tzinfo-data'
+gem "guard"
+gem "guard-middleman"
+gem "guard-shell"
+gem "humanize"
+gem "middleman"
+gem "middleman-autoprefixer"
+gem "middleman-blog"
+gem "middleman-livereload"
+gem "middleman-syntax"
+gem "rake"
+gem "redcarpet"
+gem "tzinfo-data"
 # gem 'wdm'
-gem 'webrick'
+gem "webrick"

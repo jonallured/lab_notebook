@@ -8,7 +8,7 @@ class Sprint
   end
 
   def title
-    @path.split('/').last
+    @path.split("/").last
   end
 
   def url
@@ -30,7 +30,7 @@ class Oneonone
   end
 
   def title
-    @path.split('/').last
+    @path.split("/").last
   end
 
   def url
@@ -52,11 +52,11 @@ class Something
   end
 
   def title
-    @path.split('/').last.split('.').first
+    @path.split("/").last.split(".").first
   end
 
   def url
-    slug = @path.split('/')[3]
+    slug = @path.split("/")[3]
     "/notes/one-on-ones/#{slug}/#{title}"
   end
 
@@ -67,12 +67,12 @@ end
 
 module CustomHelpers
   def calculate_sprints
-    sprint_paths = Dir.glob('source/notes/sprints/20*')
+    sprint_paths = Dir.glob("source/notes/sprints/20*")
     Sprint.compute_for(sprint_paths)
   end
 
   def calculate_one_on_ones
-    paths = Dir.glob('source/notes/one-on-ones/*-*')
+    paths = Dir.glob("source/notes/one-on-ones/*-*")
     Oneonone.compute_for(paths)
   end
 
@@ -86,6 +86,6 @@ module CustomHelpers
       link_to(tag, tag_path(tag))
     end
 
-    links.join(', ')
+    links.join(", ")
   end
 end

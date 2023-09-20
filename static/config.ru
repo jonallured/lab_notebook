@@ -18,7 +18,7 @@ class StaticApp
   private
 
   def compute_index_data(env)
-    path_info = env['PATH_INFO']
+    path_info = env["PATH_INFO"]
     path = Rack::Utils.unescape(path_info)
     index_file = "#{root}/public#{path}/index.html"
 
@@ -26,7 +26,7 @@ class StaticApp
   end
 
   def send_index_data(data)
-    [200, { 'Content-Type' => 'text/html' }, [data]]
+    [200, {"Content-Type" => "text/html"}, [data]]
   end
 
   def fallback_app
@@ -38,6 +38,6 @@ class StaticApp
   end
 end
 
-use Rack::Static, urls: [''], root: 'public', index: 'index.html', cascade: true
+use Rack::Static, urls: [""], root: "public", index: "index.html", cascade: true
 
 run StaticApp.new
