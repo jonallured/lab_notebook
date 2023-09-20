@@ -13,9 +13,10 @@ group "watch_notes" do
     ignore(%r{^source/notes/\.git})
 
     watch(%r{^source/notes/.*$}) do
-      message = "Auto-adding this diff from Guard"
-      command = "cd source/notes && git add . && git commit -m '#{message}'"
-      system command
+      puts "saw some changes!"
+      # message = "Auto-adding this diff from Guard"
+      # command = "cd source/notes && git add . && git commit -m '#{message}'"
+      # system command
     end
   end
 end
