@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -e
-
-person=$@
-filename=source/notes/one-on-ones/$person/$(date +%F).html.md
-cp ooo_templates/note.html.md $filename
-echo $filename
