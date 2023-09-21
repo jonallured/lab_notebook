@@ -16,7 +16,8 @@
   %p
     #{current_article.date.strftime('%m/%d/%y')} ~ tags:
     - if current_article.tags.size > 0
-      = tag_list(current_article.tags)
+      - current_article.tags.each do |tag|
+        = link_to tag, tag_path(tag)
     - else
       none
   = yield
