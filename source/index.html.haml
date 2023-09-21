@@ -1,8 +1,17 @@
 %h2 Most recent notes
 
 %ul
-- blog.articles.first(10).each do |article|
-  %li= link_to article.title, article.url
+  - blog.articles.first(10).each do |article|
+    %li= link_to article.title, article.url
 
-%p
-  = link_to "view by tag", "/tags"
+%h2 Starred notes
+
+%ul
+  - blog.articles.select { |a| a.data.starred }.each do |article|
+    %li= link_to article.title, article.url
+
+%h2 Tags
+
+%ul.tags
+  - blog.tags.keys.sort.each do |tag|
+    %li #{link_to tag, tag_path(tag)} (#{blog.tags[tag].count})
