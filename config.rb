@@ -18,7 +18,7 @@ end
 activate :blog do |blog|
   blog.default_extension = ".md"
   blog.layout = "note"
-  blog.new_article_template = File.expand_path("article_templates/default.erb", File.dirname(__FILE__))
+  blog.new_article_template = File.expand_path("templates/default.erb", File.dirname(__FILE__))
   blog.permalink = "notes/{id}.html"
   blog.sources = "notes/{year}/{month}/{title}.html"
   blog.tag_template = "tag.html"
