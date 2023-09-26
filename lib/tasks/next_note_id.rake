@@ -2,7 +2,7 @@ require "yaml"
 
 desc "Compute next note id"
 task :next_note_id do
-  note_paths = Dir.glob("source/notes/general/**/**/*.md")
+  note_paths = Dir.glob("source/notes/**/**/*.md")
 
   ids = note_paths.map do |path|
     data = File.read(path)
