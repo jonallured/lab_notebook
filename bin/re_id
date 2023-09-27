@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+title=$1
+date=$2
+tags=$3
+id=$4
+
+# output=$(yes | bundle exec middleman article "$title"  --date "$date" --tags "$tags")
+output=$(bundle exec middleman article "$title"  --date "$date" --tags "$tags")
+article_path=$(echo $output | tr -s ' ' | cut -d ' ' -f2)
+
+sed -i '' "s/ID/$id/" $article_path
+cat tmp/$id.md >> $article_path
