@@ -28,7 +28,7 @@ class StaticApp
   end
 
   def send_index_data(data)
-    [200, {"Content-Type" => "text/html"}, [data]]
+    [200, {"content-type" => "text/html"}, [data]]
   end
 
   def fallback_app
