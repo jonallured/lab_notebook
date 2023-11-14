@@ -1,3 +1,5 @@
+require "rack"
+
 class StaticApp
   attr_reader :root
 
